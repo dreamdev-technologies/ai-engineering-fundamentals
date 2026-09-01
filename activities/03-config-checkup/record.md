@@ -10,8 +10,8 @@ Tool used on it:
 Lines tagged:
 Lines kept:
 
-## Step 2: instruction files in your own repository
-(path and line count, one per line)
+## Step 2: what the agent says it loads from your own repository
+(path and line count, one per line; note anything that surprised you)
 
 ## Step 3: what a session carries
 Claude Code `/context` total tokens:

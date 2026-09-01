@@ -47,8 +47,8 @@ Five minutes, then stop, whether or not you reached the end of the file.
    List every file you load as instructions at the start of a session in this repository, and any in my home folder that apply to every project: CLAUDE.md files at any level, .claude/rules, AGENTS.md, .github/copilot-instructions.md, .github/instructions/*.instructions.md, and any skills, prompts or agents folders. Give the full path and line count of each. Do not change anything.
    ```
 
-3. Read the answer as a pair. Open one of the files it names to confirm it is real, and think about what it might have missed: the personal file at `~/.claude/CLAUDE.md` is the usual one, because it loads on every project and people forget it exists. If the agent did not mention it, ask.
-4. Write every path and line count into `record.md`. If the answer is "none", skip to step 5.
+3. The agent replies with a list: the files it loads in full at every start, the skills and agents whose names it carries, memory files, hooks and settings. Both of you read it. Open one of the files it names to confirm it is real. Then ask yourselves what it might have missed; the usual ones are the personal file at `~/.claude/CLAUDE.md`, which loads on every project and people forget exists, and memory folders left behind by an old checkout path. If the list does not mention them, ask: `Is there a CLAUDE.md in my home folder, or a memory folder for this repository under another path, that you also load?`
+4. Write every path and line count into `record.md`, including anything that surprised you: a skill advertised twice, a memory file nobody remembers writing. If the answer is "none", skip to step 5.
 
 The point of doing it this way rather than with a search command: the agent is the thing carrying the context, so it is the right thing to ask. Claude Code users will see the same list under `/context` in the next step, which is the check on the answer.
 
@@ -86,7 +86,7 @@ Do not open, edit or ask about any other file in the repository. The scope is th
 
 **Claude Code:** in a session on the exercise repository, type each of these and note what comes back: `/mcp` (servers), `/plugin` (installed plugins), `/skills`, `/agents`, `/hooks`, `/memory`. **Copilot:** the extensions and MCP servers from step 3, plus any `.github/prompts/` and `.github/skills/` folders in the repository.
 
-For each item, answer as a pair in one line: what would break if this were removed? Write the list and the answers into `record.md`. Anything you could not answer for is the next thing to switch off; you do not have to switch it off now.
+For each item, agree between you, in one line: what would break if this were removed? Write the list and the answers into `record.md`. Anything you could not answer for is the next thing to switch off; you do not have to switch it off now.
 
 ### Step 7. Ask the agent one question (2 minutes, own repository)
 
