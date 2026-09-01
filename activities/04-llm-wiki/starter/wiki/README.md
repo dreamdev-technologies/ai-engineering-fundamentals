@@ -20,7 +20,7 @@ Written context about the business and the system, kept in the repository so tha
 ## House rules
 
 - **One topic per file, under 150 lines.** Split anything bigger; an oversized page crowds out everything else in the agent's context.
-- **A searchable header.** YAML frontmatter with a one-line `description` and `tags`, using terms from the [glossary](glossary.md).
+- **A searchable header.** YAML frontmatter with a one-line `description` and `tags`: the page type (business, architecture, gotchas, glossary) plus the [glossary](glossary.md) terms the page covers.
 - **Navigable by people.** Every page is listed in [index.md](index.md) with a one-line summary and links to its neighbours. If a person cannot browse it, they will not maintain it.
 - **Point at living values, never copy them.** Write "duty rates live in `src/Calculator/DutyRates.cs`", not a table of rates that will go stale. A stale fact stated confidently is the most dangerous thing a wiki can hold.
 - **Fix by pull request.** A wrong page is corrected the way wrong code is: a change, a review, a merge.
