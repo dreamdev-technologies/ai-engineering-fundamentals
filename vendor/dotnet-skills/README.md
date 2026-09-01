@@ -2,7 +2,17 @@
 
 An offline copy of the `dotnet-test` plugin from [dotnet/skills](https://github.com/dotnet/skills), taken from commit `34950f875e1db782ab97417bfb6e44d1c4a9acf9`, MIT licensed (see LICENSE). Use it only if the plugin marketplace is blocked on your machine; otherwise install from GitHub as activity 03 describes, because that copy is kept current and this one is not.
 
-## Claude Code
+## Simplest: no plugin at all
+
+`/plugin` is not available in every place Claude Code runs. The skills are plain markdown, so the reliable route is to ask the agent:
+
+```
+Copy every folder under vendor/dotnet-skills/plugins/dotnet-test/skills into .claude/skills, and every file under vendor/dotnet-skills/plugins/dotnet-test/agents into .github/agents. Do not change their contents.
+```
+
+Both tools read `.claude/skills/`. Start a fresh session afterwards.
+
+## Claude Code, where `/plugin` works
 
 This folder is itself a plugin marketplace, so the install is the same two commands with a local path:
 

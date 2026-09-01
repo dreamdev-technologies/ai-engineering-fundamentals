@@ -126,7 +126,13 @@ If nobody in the pair has a repository they can open on a laptop in the room, or
 
 ## Notes
 
-If the plugin marketplace is blocked on your machines, use the copy vendored under `vendor/dotnet-skills`. It is itself a local marketplace, so the same two commands work with a path: `/plugin marketplace add ./vendor/dotnet-skills`, then `/plugin install dotnet-test@dotnet-agent-skills-local`. For Copilot, `vendor/dotnet-skills/README.md` gives the copy step.
+If the plugin marketplace is blocked on your machines, or the tool says `/plugin` is not available where you are running it, skip plugins entirely. The skills are markdown files and both tools read them from `.claude/skills/`. Type:
+
+```
+Copy every folder under vendor/dotnet-skills/plugins/dotnet-test/skills into .claude/skills, and every file under vendor/dotnet-skills/plugins/dotnet-test/agents into .github/agents. Do not change their contents.
+```
+
+Then start a fresh session and check `/skills` (Claude Code) or type `/` in Copilot Chat. The before-and-after measurement in step 7 still works: only the descriptions load at rest.
 
 Three habits to carry out of this activity. Clear the session between unrelated tasks (`/clear` in Claude Code, a new chat in Copilot) rather than letting context accumulate; after two failed corrections on the same thing, clear and write a better first prompt. Treat the instructions file like code: owned, reviewed, pruned, and tested by whether behaviour actually changes when a line goes. And when you upgrade the model, re-read the file: what was a necessary restraint for the last model is dead weight, or worse, for the next.
 
