@@ -1,31 +1,8 @@
 # 03. Config check-up
 
-Pairs. 25 minutes. Two laptops: one with the exercise repository open, one with a repository your pair works in every day. `old-style-CLAUDE.md` in this directory.
+Pairs. 25 minutes. Two laptops: one with the exercise repository, one with a repository your pair works in every day. Everything you need is in this folder: `old-style-CLAUDE.md` to calibrate on, and `record.md` to fill in as you go.
 
-## Before you start: which tool, and how to work as a pair
-
-**Which tool.** "Copilot" here means GitHub Copilot in VS Code, with the Copilot Chat panel open (`Ctrl+Alt+I`, or the chat icon in the top bar). "Claude Code" means the `claude` command in a terminal, or the Claude Code panel in VS Code if the extension is installed. On your own repository, use the tool you already use on that code at work. For most people in the room that is Copilot. Use Claude Code on your own repository only if it has been approved for that code; if you are not sure, it has not, and Claude Code stays on the exercise repository.
-
-**How to pair.** One person has the keyboard (the driver) and does exactly what the steps say. The other (the navigator) reads the step aloud, watches, and writes the results into the record sheet below. Swap roles at step 4.
-
-**The record sheet.** Before you begin, create a file `notes.md` in this directory (in the exercise repository, not your own) and paste this into it. You fill it in as you go, and it is what you show at the end.
-
-```
-Pair:
-Own repository:                    Tool used on it:
-
-Step 1  Old-style file: lines total ___  lines kept ___
-Step 2  Instruction files found in own repo (path : lines):
-
-Step 3  Session baseline (Claude Code /context total tokens, or Copilot: extensions + MCP servers + instruction lines):
-
-Step 4  Lines cut ___   Lines kept ___   Procedures moved to skills ___
-Step 6  Other things loaded, and what would break without each:
-
-Step 7  Question asked:            Answer good enough? (y/n) and why:
-Step 8  Skills after install ___   Agents ___   /context total after install ___
-One number for what the change saves per prompt:
-```
+On your own repository, use the tool you already use on that code at work, which for most people is Copilot. Use Claude Code on your own repository only if it has been approved for that code; if you are not sure, it has not, and Claude Code stays on the exercise repository. How to start, clear and talk to either tool is in [tools.md](../tools.md).
 
 ## Why this activity exists
 
@@ -56,7 +33,7 @@ What usually survives is the purpose line, the gotchas, and pointers to where th
 
 1. In VS Code, open `activities/03-config-checkup/old-style-CLAUDE.md`. Save a copy next to it as `old-style-CLAUDE.audit.md` (File, Save As) so the original stays clean.
 2. Work down the copy one line at a time. The navigator reads the line aloud; the driver types a tag at the start of it: one of the six smell tags above, or `[KEEP]`. Blank lines and headings get no tag. Do not discuss any line for more than fifteen seconds; if you disagree, tag it with both and move on.
-3. When you reach the end, count the keeps. In the VS Code search box (`Ctrl+F`) search for `[KEEP]`; the count appears on the right of the box. Write the total number of tagged lines and the number of keeps into the record sheet.
+3. When you reach the end, count the keeps. In the VS Code search box (`Ctrl+F`) search for `[KEEP]`; the count appears on the right of the box. Write the total number of tagged lines and the number of keeps into `record.md`.
 4. Open the exercise repository's real `CLAUDE.md` beside it (drag the tab to the right to split the editor). That file is roughly what your `[KEEP]` lines say. That is the end state you are aiming for on your own repository.
 
 Five minutes, then stop, whether or not you reached the end of the file.
@@ -71,15 +48,15 @@ Five minutes, then stop, whether or not you reached the end of the file.
    ```
 
 3. Read the answer as a pair. Open one of the files it names to confirm it is real, and think about what it might have missed: the personal file at `~/.claude/CLAUDE.md` is the usual one, because it loads on every project and people forget it exists. If the agent did not mention it, ask.
-4. Write every path and line count into the record sheet. If the answer is "none", skip to step 5.
+4. Write every path and line count into `record.md`. If the answer is "none", skip to step 5.
 
 The point of doing it this way rather than with a search command: the agent is the thing carrying the context, so it is the right thing to ask. Claude Code users will see the same list under `/context` in the next step, which is the check on the answer.
 
 ### Step 3. Measure what a session on your repository carries (3 minutes, own repository)
 
-**Claude Code** (only if approved for this repository): in the terminal, in the repository folder, run `claude`. When the prompt appears, type `/context` and press Enter. It prints a breakdown: system prompt, CLAUDE.md, skills, MCP tools, memory, with a token count for each and a total. Write the total and the CLAUDE.md line into the record sheet. Type `/exit` to leave.
+**Claude Code** (only if approved for this repository): in the terminal, in the repository folder, run `claude`. When the prompt appears, type `/context` and press Enter. It prints a breakdown: system prompt, CLAUDE.md, skills, MCP tools, memory, with a token count for each and a total. Write the total and the CLAUDE.md line into `record.md`. Type `/exit` to leave.
 
-**Copilot:** there is no token count. Instead record three things. Extensions: open the Extensions view (`Ctrl+Shift+X`), type `@installed` in its search box, and count what is listed. MCP servers: open the Command Palette (`Ctrl+Shift+P`), type `MCP: List Servers`, press Enter, and count what is listed. Instruction lines: add up the line counts from step 2. Write all three into the record sheet. If you want a token number to attach to it, do the Claude Code version of this step on the exercise repository instead and note that it is a different repository.
+**Copilot:** there is no token count. Instead record three things. Extensions: open the Extensions view (`Ctrl+Shift+X`), type `@installed` in its search box, and count what is listed. MCP servers: open the Command Palette (`Ctrl+Shift+P`), type `MCP: List Servers`, press Enter, and count what is listed. Instruction lines: add up the line counts from step 2. Write all three into `record.md`. If you want a token number to attach to it, do the Claude Code version of this step on the exercise repository instead and note that it is a different repository.
 
 ### Step 4. Audit your own instruction files and make the change (8 minutes, own repository)
 
@@ -94,7 +71,7 @@ Swap driver and navigator.
    ```
 
 4. Read the diff together before accepting it. Did it do only what you said? A moved procedure should now be a folder with a `SKILL.md` in it and one line where it used to be.
-5. Ask: `How many lines did the instructions file lose, and how many remain?` Write both into the record sheet. Claude Code users: type `/doctor`, press Enter, and read what it still proposes to cut; act on anything you agree with.
+5. Ask: `How many lines did the instructions file lose, and how many remain?` Write both into `record.md`. Claude Code users: type `/doctor`, press Enter, and read what it still proposes to cut; act on anything you agree with.
 
 Do not open, edit or ask about any other file in the repository. The scope is the instruction files.
 
@@ -109,7 +86,7 @@ Do not open, edit or ask about any other file in the repository. The scope is th
 
 **Claude Code:** in a session on the exercise repository, type each of these and note what comes back: `/mcp` (servers), `/plugin` (installed plugins), `/skills`, `/agents`, `/hooks`, `/memory`. **Copilot:** the extensions and MCP servers from step 3, plus any `.github/prompts/` and `.github/skills/` folders in the repository.
 
-For each item, answer as a pair in one line: what would break if this were removed? Write the list and the answers into the record sheet. Anything you could not answer for is the next thing to switch off; you do not have to switch it off now.
+For each item, answer as a pair in one line: what would break if this were removed? Write the list and the answers into `record.md`. Anything you could not answer for is the next thing to switch off; you do not have to switch it off now.
 
 ### Step 7. Ask the agent one question (2 minutes, own repository)
 
@@ -119,19 +96,19 @@ In the tool approved for your repository, start a fresh session (`claude` in the
 What does this repository do, and how do I build and run its tests?
 ```
 
-Read the answer against what you now know is loaded. Did it use your instructions file, or did it read the code? Was anything in the answer wrong because of a line you have just cut, or a line you kept? Write one line in the record sheet.
+Read the answer against what you now know is loaded. Did it use your instructions file, or did it read the code? Was anything in the answer wrong because of a line you have just cut, or a line you kept? Write one line in `record.md`.
 
 ### Step 8. Install the testing skills for the later activities (2 minutes, exercise repository)
 
-**Claude Code:** in a session on the exercise repository, type `/plugin marketplace add dotnet/skills` and press Enter, then `/plugin install dotnet-test@dotnet-agent-skills`, then `/skills` and `/agents` to see what arrived. Count them; around two dozen skills and ten agents. Then `/context` again and write the new total into the record sheet. It will have moved very little, because only each skill's name and description loads at rest and the body arrives when something invokes it. That is progressive disclosure, measured, and it is where the procedures you moved out in step 4 now live.
+**Claude Code:** in a session on the exercise repository, type `/plugin marketplace add dotnet/skills` and press Enter, then `/plugin install dotnet-test@dotnet-agent-skills`, then `/skills` and `/agents` to see what arrived. Count them; around two dozen skills and ten agents. Then `/context` again and write the new total into `record.md`. It will have moved very little, because only each skill's name and description loads at rest and the body arrives when something invokes it. That is progressive disclosure, measured, and it is where the procedures you moved out in step 4 now live.
 
 **Copilot:** open Settings (`Ctrl+,`), search `chat.plugins.enabled` and tick it, then search `chat.plugins.marketplaces` and add `dotnet/skills` to the list. In Copilot Chat type `/plugins` and install `dotnet-test`. If the marketplace is blocked, see the notes.
 
-Last line of the record sheet: one number for what your change saves on every prompt. Claude Code: the difference in `/context` totals between the old and new instructions file (start a fresh session to measure the new one). Copilot: the lines removed from step 4.
+Last line of `record.md`: one number for what your change saves on every prompt. Claude Code: the difference in `/context` totals between the old and new instructions file (start a fresh session to measure the new one). Copilot: the lines removed from step 4.
 
 ## Done when
 
-The record sheet is filled in, your own repository has a `config-checkup` branch with the instructions file pruned or written, your pair can say in one sentence what each surviving line prevents, and you have one number for what the change saves on every prompt.
+`record.md` is filled in, your own repository has a `config-checkup` branch with the instructions file pruned or written, your pair can say in one sentence what each surviving line prevents, and you have one number for what the change saves on every prompt.
 
 ## Fallback
 

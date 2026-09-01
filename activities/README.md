@@ -1,5 +1,7 @@
 # Activities
 
+Read [tools.md](tools.md) once first: how to start, clear and talk to either tool, and how to use a skill or an agent. Every file an activity needs is already in its folder; nothing has to be created by hand.
+
 A library of standalone activities, not a fixed agenda. Pull whichever ones fit the session you are running; each `instructions.md` is a self-contained step-by-step tutorial with its own time budget and done criterion. The numbering is an identifier and a sensible default order, not a schedule. Activity 01 is the opening talk, which the facilitator brings; the library starts at 02.
 
 | # | Activity | Format | Time | Needs first |
