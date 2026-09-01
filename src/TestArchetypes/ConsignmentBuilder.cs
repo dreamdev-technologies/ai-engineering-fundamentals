@@ -15,6 +15,9 @@ public sealed class ConsignmentBuilder
 
     public static ConsignmentBuilder AConsignment() => new();
 
+    /// <summary>A builder set up as a well-known consignment, for example <c>ConsignmentBuilder.For&lt;TheStoryOneConsignment&gt;()</c>.</summary>
+    public static ConsignmentBuilder For<T>() where T : ConsignmentArchetype, new() => new T().Configure(new ConsignmentBuilder());
+
     public ConsignmentBuilder WithReference(string reference) { _reference = reference; return this; }
     public ConsignmentBuilder From(string originCountry) { _origin = originCountry; return this; }
     public ConsignmentBuilder ArrivingOn(DateOnly date) { _arrival = date; return this; }

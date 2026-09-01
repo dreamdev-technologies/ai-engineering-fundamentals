@@ -14,6 +14,9 @@ public sealed class LineItemBuilder
 
     public static LineItemBuilder ALineItem() => new();
 
+    /// <summary>A builder set up as a well-known lot, for example <c>LineItemBuilder.For&lt;ACartonOfBananas&gt;()</c>.</summary>
+    public static LineItemBuilder For<T>() where T : LotArchetype, new() => new T().Configure(new LineItemBuilder());
+
     public LineItemBuilder WithCommodityCode(string code) { _commodityCode = code; return this; }
     public LineItemBuilder WithDescription(string description) { _description = description; return this; }
     public LineItemBuilder WithQuantity(int quantity) { _quantity = quantity; return this; }

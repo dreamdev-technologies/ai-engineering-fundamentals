@@ -10,7 +10,7 @@ Acceptance tests are the contract an implementation is built against. They are w
 ## Where and how
 
 - xUnit, in `src/Calculator.Tests`. One class per story, file named `Story<N>_<Topic>Tests.cs`.
-- Build inputs with the archetypes in `src/TestArchetypes`, imported with `using static TestArchetypes.ConsignmentBuilder;` and `using static TestArchetypes.LineItemBuilder;`. Override only the values the test is about; the defaults are the archetype.
+- Build inputs from the archetypes in `src/TestArchetypes`: `ConsignmentBuilder.For<TheStoryOneConsignment>()`, `LineItemBuilder.For<APalletOfWinterCitrus>()`, then `.With...` for the one value the test is about. Read `src/TestArchetypes/README.md` and `Lots.cs`, `Consignments.cs` and `WellKnown.cs` first; use an existing archetype where one is close, and when a story needs a case none of them covers, add a named archetype there rather than spelling the values out in the test. Never construct domain objects directly in a test.
 - Test names are sentences about behaviour, underscores for spaces: `Freight_is_shared_by_weight`, `Shares_add_up_to_the_freight_exactly`. No `Test1`, no method names.
 - Arrange, act, assert, in that order, separated by a blank line. One behaviour per test.
 - Assert exact values. Money is compared as `Money.Of(712.50m, "EUR")`, never with a tolerance. Where the story gives a worked example, use its numbers; add at least one case the example does not cover.

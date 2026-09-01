@@ -45,4 +45,4 @@ Work is tracked in a work item system organised as epics, features and stories. 
 
 ## Test support in this repository
 
-`src/TestArchetypes` holds builders that produce valid default domain objects for tests. `LineItemBuilder` and `ConsignmentBuilder` are the worked examples; add builders there as the domain model grows and document them here.
+`src/TestArchetypes` holds the builders and the named archetypes that tests are built from: the lots and consignments the business talks about, each with a one-sentence description, plus `WellKnown` names for the currencies, origins, growers and dates that matter. Add an archetype there whenever a story or a gotcha names a case none of the existing ones covers, and add its name to the [glossary](glossary.md).
