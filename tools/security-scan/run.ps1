@@ -3,10 +3,13 @@
 $root = (Resolve-Path "$PSScriptRoot/../..").Path
 $sln = Join-Path $root "AiEngineeringFundamentals.sln"
 $rules = "CA5350,CA5351,CA5394,CA2100"
+# MSBuild splits a -p: value on commas and reads each part after the first as a switch
+# of its own (MSB1006), so the rules are escaped before being passed through.
+$rulesArg = $rules -replace ",", "%2c"
 $findings = 0
 
 Write-Host "== Static analysis ($rules as errors)"
-dotnet build $sln --nologo --no-incremental -clp:NoSummary "-p:WarningsAsErrors=$rules" | Where-Object { $_ -match "error|warning CA|Build succeeded" }
+dotnet build $sln --nologo --no-incremental -clp:NoSummary "-p:WarningsAsErrors=$rulesArg" | Where-Object { $_ -match "error|warning CA|Build succeeded" }
 if ($LASTEXITCODE -ne 0) { $findings++; Write-Host "FINDING: static analysis reported security rule violations" } else { Write-Host "clean" }
 
 Write-Host ""
