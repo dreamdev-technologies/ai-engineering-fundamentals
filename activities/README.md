@@ -5,7 +5,7 @@ A library of standalone activities, not a fixed agenda. Pull whichever ones fit 
 | # | Activity | Format | Time | Needs first |
 |---|---|---|---|---|
 | 02 | Value stream mapping | Groups of 3 or 4 | 40 min | Nothing |
-| 03 | Config check-up | Pairs | 20 min | The exercise repo |
+| 03 | Config check-up | Pairs | 25 min | The exercise repo |
 | 04 | The LLM wiki | Pairs | 30 min | The exercise repo |
 | 05 | Acceptance tests first | Pairs | 45 min | 03; 04 helps |
 | 06 | Goal-driven delegation | Pairs | 30 min | 05 (its verification) |
