@@ -1,6 +1,6 @@
 # The four principles
 
-Print large, one per sheet, and put them on the wall for the debrief.
+Put this on screen for the debrief.
 
 ## 1. Set up for flow
 

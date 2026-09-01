@@ -1,6 +1,6 @@
 # Value stream map: template
 
-Print one per group, or copy it onto a whiteboard. Fill in the stages the change really went through, left to right.
+Shown on screen; each group copies the layout onto paper or a whiteboard. Fill in the stages the change really went through, left to right.
 
 **Change mapped:** ______________________________    **Group:** ______________
 
