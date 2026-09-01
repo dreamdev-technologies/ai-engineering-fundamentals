@@ -61,21 +61,19 @@ What usually survives is the purpose line, the gotchas, and pointers to where th
 
 Five minutes, then stop, whether or not you reached the end of the file.
 
-### Step 2. Find the instruction files in your own repository (3 minutes, own repository)
+### Step 2. Ask the agent what it loads from your own repository (3 minutes, own repository)
 
-1. Open your own repository in VS Code (File, Open Folder).
-2. Open a terminal inside VS Code (`` Ctrl+` ``). Run the command for your shell. It lists every instructions file the tools read, with its line count.
+1. Open your own repository in VS Code (File, Open Folder) and start the tool approved for it: Copilot Chat, or `claude` in the VS Code terminal.
+2. Type this prompt:
 
-   PowerShell:
    ```
-   Get-ChildItem -Recurse -Force -File -Include CLAUDE.md,AGENTS.md,copilot-instructions.md,*.instructions.md | Where-Object { $_.FullName -notmatch '\\node_modules\\|\\bin\\|\\obj\\' } | ForEach-Object { "{0,6}  {1}" -f (Get-Content $_.FullName | Measure-Object -Line).Lines, $_.FullName }
+   List every file you load as instructions at the start of a session in this repository, and any in my home folder that apply to every project: CLAUDE.md files at any level, .claude/rules, AGENTS.md, .github/copilot-instructions.md, .github/instructions/*.instructions.md, and any skills, prompts or agents folders. Give the full path and line count of each. Do not change anything.
    ```
-   Bash (macOS, Linux, Git Bash):
-   ```
-   find . \( -name CLAUDE.md -o -name AGENTS.md -o -name copilot-instructions.md -o -name '*.instructions.md' \) -not -path '*/node_modules/*' -not -path '*/bin/*' -not -path '*/obj/*' | xargs wc -l
-   ```
-3. Also check the two places the command does not reach: a `.claude/rules/` folder in the repository root (open it in the file explorer; each `.md` file in it is an instructions file), and your personal file at `C:\Users\<you>\.claude\CLAUDE.md` (or `~/.claude/CLAUDE.md`), which loads into every Claude Code session on every project. Open each and note its line count from the status bar at the bottom right of VS Code, which shows `Ln x` with the cursor on the last line.
-4. Write every path and line count into the record sheet. If the list is empty, skip to step 5.
+
+3. Read the answer as a pair. Open one of the files it names to confirm it is real, and think about what it might have missed: the personal file at `~/.claude/CLAUDE.md` is the usual one, because it loads on every project and people forget it exists. If the agent did not mention it, ask.
+4. Write every path and line count into the record sheet. If the answer is "none", skip to step 5.
+
+The point of doing it this way rather than with a search command: the agent is the thing carrying the context, so it is the right thing to ask. Claude Code users will see the same list under `/context` in the next step, which is the check on the answer.
 
 ### Step 3. Measure what a session on your repository carries (3 minutes, own repository)
 
@@ -87,26 +85,25 @@ Five minutes, then stop, whether or not you reached the end of the file.
 
 Swap driver and navigator.
 
-1. In the terminal, create a branch so nothing touches your main line: `git switch -c config-checkup`.
-2. Open the largest instructions file from step 2. Tag every line exactly as in step 1: the navigator reads, the driver types the tag at the start of the line. Fifteen seconds a line at most.
-3. Now make the edit, in the same file: delete every line tagged `[SHOUT]`, `[REPEAT]`, `[VERIFY]`, `[OLD]` or `[SHOWN]`, then remove the `[KEEP]` tags from what remains. For a `[SHOUT]` line whose rule you want to keep, keep the rule and drop the capitals; if one rule genuinely matters more than the rest, that one line may keep its emphasis.
-4. For each block tagged `[PROC]`, move it out. Create a folder and a file: for Claude Code `.claude/skills/<short-name>/SKILL.md`, for Copilot `.github/skills/<short-name>/SKILL.md`. Paste the procedure into it under this header, and put one line back in the instructions file that names the skill and when to use it:
+1. Tell the agent: `Create a git branch called config-checkup and switch to it.` Nothing touches your main line.
+2. Open the largest instructions file from step 2 in the editor. Tag every line exactly as in step 1: the navigator reads, the driver types the tag at the start of the line. Fifteen seconds a line at most. This part is yours; the judgement about what the agent needs is the whole activity, and an agent asked to prune its own instructions will keep the ones that flatter it.
+3. Save the tagged file, then hand the mechanical part over. Type:
+
    ```
-   ---
-   name: <short-name>
-   description: <one sentence saying when to use this>
-   ---
+   In <path to the file> I have tagged each line. Delete every line tagged [SHOUT], [REPEAT], [VERIFY], [OLD] or [SHOWN]. Where a [SHOUT] line carries a rule worth keeping, keep the rule in plain words without the capitals. Move each block tagged [PROC] into its own skill file under <.claude/skills or .github/skills>/<short-name>/SKILL.md with a name and a one-sentence description in the frontmatter, and leave one line in the instructions file that names the skill and when to use it. Remove the [KEEP] tags. Change nothing else, and show me the diff.
    ```
-5. Save. Run `git diff --stat` in the terminal and write the lines removed and lines kept into the record sheet. Claude Code users: run `claude`, type `/doctor`, press Enter, and read what it still proposes to cut; act on anything you agree with.
+
+4. Read the diff together before accepting it. Did it do only what you said? A moved procedure should now be a folder with a `SKILL.md` in it and one line where it used to be.
+5. Ask: `How many lines did the instructions file lose, and how many remain?` Write both into the record sheet. Claude Code users: type `/doctor`, press Enter, and read what it still proposes to cut; act on anything you agree with.
 
 Do not open, edit or ask about any other file in the repository. The scope is the instruction files.
 
 ### Step 5. If there was no instructions file, write one (8 minutes, own repository)
 
-1. `git switch -c config-checkup`.
-2. Create the file: for Copilot `.github/copilot-instructions.md`, for Claude Code `CLAUDE.md` in the repository root. (If both tools are used on the repository, create both with the same content.)
-3. Write it in three parts, under 30 lines in total. First, one line saying what the repository is for. Second, the gotchas: the things an agent cannot discover by reading the code, such as the build step that is not obvious, the folder that must not be edited, the convention that differs from the language default, the command that must not be run locally. Third, pointers: where the values live that the agent must never copy. Nothing the repository already shows; if it is visible in the folder tree or the code, it is not a gotcha.
-4. Save, and go to step 6.
+1. Tell the agent: `Create a git branch called config-checkup and switch to it.`
+2. As a pair, before touching the keyboard, agree the content out loud in three parts: one line saying what the repository is for; the gotchas, meaning the things an agent cannot discover by reading the code (the build step that is not obvious, the folder that must not be edited, the convention that differs from the language default, the command that must not be run locally); and pointers to where the values live that the agent must never copy. Nothing the repository already shows; if it is visible in the folder tree or the code, it is not a gotcha. Aim for five to ten items in total.
+3. Dictate it. Type: `Create <.github/copilot-instructions.md or CLAUDE.md> under 30 lines with exactly this content and nothing else:` followed by your items. Do not ask the agent to write it from the code; that produces a description of what the repository already shows, which is the thing the file must not contain.
+4. Read the file it wrote. Cut anything it added that you did not say. Go to step 6.
 
 ### Step 6. List everything else the session loads (2 minutes)
 
@@ -138,7 +135,7 @@ The record sheet is filled in, your own repository has a `config-checkup` branch
 
 ## Fallback
 
-If nobody in the pair has a repository they can open on a laptop in the room, or the tool is not cleared for it, do steps 2 to 7 on the exercise repository instead. First copy the planted file over the real one so there is something to cut: in the exercise repository terminal, `Copy-Item activities/03-config-checkup/old-style-CLAUDE.md CLAUDE.md` (PowerShell) or `cp activities/03-config-checkup/old-style-CLAUDE.md CLAUDE.md` (Bash). Measure with `/context`, prune it back, measure again, then restore the original with `git checkout CLAUDE.md`. The lesson is the same; only the diff is less useful on Monday.
+If nobody in the pair has a repository they can open on a laptop in the room, or the tool is not cleared for it, do steps 2 to 7 on the exercise repository instead. First put the planted file in place so there is something to cut: tell the agent `Replace CLAUDE.md with the contents of activities/03-config-checkup/old-style-CLAUDE.md`, start a fresh session, measure with `/context`, prune it back, measure again, then `Restore CLAUDE.md from git`. The lesson is the same; only the diff is less useful on Monday.
 
 ## Notes
 
