@@ -2,6 +2,16 @@
 
 On your own. 40 minutes. The exercise repository: `src/Legacy`, the tests and decisions from activity 07, and the agents from activity 08 if you ran it. How to talk to the tools is in [tools.md](../tools.md).
 
+## Why this activity exists
+
+The way most legacy replacements fail is the big one: build the new system beside the old, migrate everything on a date, and discover in production what the old system knew that nobody wrote down. Martin Fowler named the alternative in 2004 after the strangler fig, which grows around a host tree until the host is gone. In his current description it "begins with small additions, often new features, that are built on top of, yet separate to the legacy code base", and "the reduced risk and earlier value from the gradual approach outweigh its costs". One behaviour at a time, behind a seam, with the old path left in place until the new one has earned trust. Every step is small, every step is reversible, and the system runs throughout.
+
+That is also what DORA's research says about delivery in general and about AI in particular. Working in small batches has predicted delivery performance since the first Accelerate report, and it is one of the seven capabilities the 2025 AI report names as deciding whether AI pays off, because a small change is a checkable change. The Claude Code documentation makes the same point for agents: "the smaller the change, the smaller the damage". An agent asked to rewrite a legacy service will do it, confidently, in one go; an agent asked to extract one behaviour behind one seam, protected by tests that pin everything else, can be let loose.
+
+The two previous activities are the preconditions. Activity 07's characterisation tests are the net: if the extraction changes any behaviour you did not intend to change, a test you wrote for the old code goes red, and you find out in seconds rather than at month end. The KEEP and BUG decisions from 07 are the specification: the new implementation preserves every KEEP exactly and fixes every BUG deliberately, and the only characterisation tests that should fail are the ones a BUG decision predicted. Activity 05's acceptance tests, or the ATDD agent from 08, are how the new behaviour is contracted before it is built. Put together, behaviour changes only ever happen on purpose, visibly, in a test diff, which is the discipline the whole session has been building towards.
+
+The last step measures it. CRAP, Alberto Savoia's change risk metric, is complexity weighted by how little of the code your tests touch; the same behaviour, moved into a small tested class, drops from a number that says "do not touch" to one that says "safe to change", and that figure is what you put in front of someone who was not in the room.
+
 ## Goal
 
 Extract one behaviour out of the legacy service into clean, tested code, protected the whole way by the characterisation tests. This is the pattern for retiring a legacy system a slice at a time while it keeps running.
@@ -23,3 +33,11 @@ The behaviour runs in the new service, every test failure was predicted by a BUG
 ## Notes
 
 The discipline is that behaviour changes only ever happen on purpose, visibly, in a test diff. If you finish early, extract a second behaviour; the second slice is where the pattern starts to feel routine.
+
+## Sources
+
+- Martin Fowler, [Strangler Fig](https://martinfowler.com/bliki/StranglerFigApplication.html), first written 2004, rewritten August 2024.
+- DORA, [Working in small batches](https://dora.dev/capabilities/working-in-small-batches/) in the capabilities catalogue, and the [2025 AI Capabilities Model](https://dora.dev/ai/capabilities-model/report/).
+- [Best practices for Claude Code](https://code.claude.com/docs/en/best-practices), Claude Code docs: keep changes small; address the root cause.
+- Michael Feathers, *Working Effectively with Legacy Code*, Prentice Hall, 2004. Seams.
+- Alberto Savoia, [CRAP: Change Risk Anti-Patterns](https://www.artima.com/weblogs/viewpost.jsp?thread=210575), 2007.

@@ -2,6 +2,16 @@
 
 On your own. 40 minutes. The exercise repository: `src/Legacy`, `src/Legacy.Tests`, `wiki/gotchas.md`. How to talk to the tools and use a skill is in [tools.md](../tools.md).
 
+## Why this activity exists
+
+Everything so far has been on new code, where you write the contract first and the agent builds to it. Most of the work in a team mid-migration is not like that. It is old code, with rules nobody wrote down, that has to keep running while it is replaced. Michael Feathers gave the working definition twenty years ago: "legacy code is simply code without tests", and the reason that definition matters more now than it did then is that an agent will change code without tests just as confidently as code with them, and nothing will tell you what it changed.
+
+Two things make agents unusually dangerous on this kind of code. The first is that they are built to write the tests a healthy codebase should have: hand a test-generation tool a method that rounds sterling by truncation and it will write a test that asserts proper rounding, watch it fail, and offer to fix the code. The dry run of this activity did exactly that. On legacy code the surprising behaviour is often the behaviour someone downstream depends on, and a test that asserts the "right" answer deletes it silently. The second is that agents tidy. GitClear's study of 211 million changed lines, from the opening talk, found refactoring collapsing and duplication rising as AI use grew; on a system whose quirks are load-bearing, an agent that reorganises as it goes is a liability.
+
+Feathers's answer is the characterisation test: a test that "characterizes the actual behavior of a piece of code", written by running the code and recording what it does, not what anyone thinks it should do. The technique is deliberately dumb. Assert a value you know is wrong, run the test, and let the failure message tell you the truth; that observed value becomes the assertion. The code is the oracle. Done over the behaviours that matter, it produces a net: a suite that is green against the code as it stands and goes red the moment any behaviour changes, intended or not. That net is what makes the next two activities possible, and it is what makes an agent safe to point at a legacy system at all.
+
+There is one more step that the tests alone do not give you, and it is the one people skip. For every quirk you pin, someone has to decide whether it is load-bearing or a bug, and write the decision down. A characterisation suite that pins everything and decides nothing turns into a fossil that blocks every change. The KEEP and BUG comments in step 5 are that decision, and activity 09 acts on them.
+
 ## Goal
 
 Build a safety net under code nobody fully understands. Characterisation tests capture what the code does now, quirks included, so that later change becomes safe. This is the technique for any legacy migration.
@@ -28,3 +38,9 @@ The suite is green against unmodified legacy code, at least two quirks are pinne
 ## Notes
 
 A characterisation test asserting the wrong "right" answer silently deletes a behaviour someone may depend on. That is why step 3 checks the code, not the intuition. Your KEEP or BUG comments and your CRAP scores are both input to activity 09, two activities later; that is exactly why you are writing the decisions down rather than trusting anyone to remember them.
+
+## Sources
+
+- Michael Feathers, *Working Effectively with Legacy Code*, Prentice Hall, 2004. The definition of legacy code, characterisation tests, and seams.
+- GitClear, [AI Copilot Code Quality](https://www.gitclear.com/ai_assistant_code_quality_2025_research), 2025. Refactoring falling and duplication rising with AI use, from the opening talk.
+- Alberto Savoia, [CRAP: Change Risk Anti-Patterns](https://www.artima.com/weblogs/viewpost.jsp?thread=210575), 2007. The metric step 4 uses: complexity weighted by how little of the method your tests touch.
