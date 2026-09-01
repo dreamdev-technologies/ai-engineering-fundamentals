@@ -58,7 +58,9 @@ The point of doing it this way rather than with a search command: the agent is t
 
 **Copilot:** there is no token count. Instead record three things. Extensions: open the Extensions view (`Ctrl+Shift+X`), type `@installed` in its search box, and count what is listed. MCP servers: open the Command Palette (`Ctrl+Shift+P`), type `MCP: List Servers`, press Enter, and count what is listed. Instruction lines: add up the line counts from step 2. Write all three into `record.md`. If you want a token number to attach to it, do the Claude Code version of this step on the exercise repository instead and note that it is a different repository.
 
-### Step 4. Audit your own instruction files and make the change (8 minutes, own repository)
+Steps 4 and 5 are alternatives. If step 2 found instruction files, do step 4 and skip 5. If it found none, skip to step 5.
+
+### Step 4. Your repository has instruction files: audit them and make the change (8 minutes, own repository)
 
 Swap driver and navigator.
 
@@ -75,10 +77,12 @@ Swap driver and navigator.
 
 Do not open, edit or ask about any other file in the repository. The scope is the instruction files.
 
-### Step 5. If there was no instructions file, write one (8 minutes, own repository)
+### Step 5. Your repository has no instructions file: write the first one (8 minutes, own repository)
+
+Swap driver and navigator. The agent will type the file; you decide every word in it. An instructions file written by the agent from the code describes what the code already shows, which is exactly what the file must not contain.
 
 1. Tell the agent: `Create a git branch called config-checkup and switch to it.`
-2. As a pair, before touching the keyboard, agree the content out loud in three parts: one line saying what the repository is for; the gotchas, meaning the things an agent cannot discover by reading the code (the build step that is not obvious, the folder that must not be edited, the convention that differs from the language default, the command that must not be run locally); and pointers to where the values live that the agent must never copy. Nothing the repository already shows; if it is visible in the folder tree or the code, it is not a gotcha. Aim for five to ten items in total.
+2. Before touching the keyboard, agree the content out loud between you, in three parts: one line saying what the repository is for; the gotchas, meaning the things an agent cannot discover by reading the code (the build step that is not obvious, the folder that must not be edited, the convention that differs from the language default, the command that must not be run locally); and pointers to where the values live that the agent must never copy. Nothing the repository already shows; if it is visible in the folder tree or the code, it is not a gotcha. Aim for five to ten items in total.
 3. Dictate it. Type: `Create <.github/copilot-instructions.md or CLAUDE.md> under 30 lines with exactly this content and nothing else:` followed by your items. Do not ask the agent to write it from the code; that produces a description of what the repository already shows, which is the thing the file must not contain.
 4. Read the file it wrote. Cut anything it added that you did not say. Go to step 6.
 

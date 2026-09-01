@@ -10,7 +10,7 @@ The three stories rise in ambiguity. That is deliberate: story one is precise, s
 
 ## Steps
 
-1. Read story one. As a pair, write its acceptance tests in `src/Calculator.Tests` before any implementation. Use the builders in `src/TestArchetypes` and the repository's `acceptance-tests` skill for style. Do not let the agent write these; drafting them is where you find the questions.
+1. Read story one. Together, write its acceptance tests in `src/Calculator.Tests` before any implementation. Use the builders in `src/TestArchetypes` and the repository's `acceptance-tests` skill for style. Do not let the agent write these; drafting them is where you find the questions.
 2. Review your tests together with one filter: if the implementation were subtly wrong, would these fail? Add the case that catches it. Then grade the contract before anyone builds against it. Type `/grade-tests src/Calculator.Tests/<your test file>.cs` for a letter grade per test method, then `/assertion-quality src/Calculator.Tests/<your test file>.cs` for whether your assertions pin behaviour or merely confirm that nothing threw. (In words, if you prefer: `Use the grade-tests skill on ...`.) Act on what they surface. Neither skill writes tests for you, and that is deliberate: you are grading your own contract, not outsourcing it.
 3. Hand over. Type:
    ```
