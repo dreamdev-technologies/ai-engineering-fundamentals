@@ -27,4 +27,4 @@ Written context about the business and the system, kept in the repository so tha
 
 ## Adding a page
 
-Create the file with frontmatter, keep it inside the size limit, add its line to `index.md`, link it from the page it is most related to, then run the `wiki-auditor` agent (`.claude/agents/`) over it before opening the pull request.
+Create the file with frontmatter, keep it inside the size limit, add its line to `index.md`, link it from the page it is most related to, append a line to `log.md`, then run the `wiki-auditor` agent (`.claude/agents/`) over it before opening the pull request. Those are the three operations of the LLM wiki pattern: ingest, query with good answers filed back, and lint.
