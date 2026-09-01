@@ -12,7 +12,7 @@ The same lesson now comes from the people who build the tools. Anthropic's July 
 
 That is also how to place this against spec-driven development, which some of you will have seen as GitHub's Spec Kit (September 2025): specify, plan, break into tasks, implement, with the spec as "the source of truth your tools and AI agents use to generate, test, and validate code". The specify and plan steps are worth keeping; writing the story down and asking what it leaves open is exactly step 1 here. But a spec is prose, and the agent that implements it is also the thing that decides whether it has met it. Nothing enforces a paragraph. An acceptance test is the sentence of the spec that has been made executable: the agent cannot reinterpret it, cannot skip it, and cannot claim success while it is red. This is not new either; Gojko Adzic called it specification by example in 2011, and the practice of writing the acceptance tests before the code, acceptance test driven development, is older still. What has changed is that the thing on the other side of the contract now works at machine speed, so the contract has to be checkable at machine speed too.
 
-Two consequences shape the steps below. You write the tests, not the agent, because writing them is where the story's gaps show up, and an agent that drafts them answers those questions silently on your behalf. And the moment an agent edits a test to make it pass is the most valuable moment of the activity: it is unverified delegation doing exactly what it always does, in front of you.
+Two consequences shape the steps below. You decide the acceptance criteria and the agent types the tests, because the decisions are where the story's gaps show up and typing fixtures is not; the danger is an agent that resolves those gaps silently on your behalf, so the agent is told to list the questions and stop, and you answer them before a line of test code exists. And the moment an agent edits a test to make it pass is the most valuable moment of the activity: it is unverified delegation doing exactly what it always does, in front of you.
 
 ## Goal
 
@@ -22,8 +22,16 @@ The three stories rise in ambiguity. That is deliberate: story one is precise, s
 
 ## Steps
 
-1. Read story one. Write its acceptance tests in `src/Calculator.Tests` before any implementation. Use the builders in `src/TestArchetypes` and the repository's `acceptance-tests` skill for style. Do not let the agent write these; drafting them is where you find the questions.
-2. Review your tests with one filter: if the implementation were subtly wrong, would these fail? Add the case that catches it. Then grade the contract before anyone builds against it. Type `/grade-tests src/Calculator.Tests/<your test file>.cs` for a letter grade per test method, then `/assertion-quality src/Calculator.Tests/<your test file>.cs` for whether your assertions pin behaviour or merely confirm that nothing threw. (In words, if you prefer: `Use the grade-tests skill on ...`.) Act on what they surface. Neither skill writes tests for you, and that is deliberate: you are grading your own contract, not outsourcing it.
+1. Read story one yourself. Then agree the criteria with the agent before any test exists. In a fresh session, type:
+   ```
+   Read activities/05-acceptance-tests-first/story-1.md and the acceptance-tests skill. List the acceptance criteria you can find in the story, one line each, and separately list every question the story leaves open, with the two readings you can see for each. Do not write any tests or code yet.
+   ```
+   Read both lists. Add any criterion it missed. For each open question, decide the answer yourself and tell it: `Question 2: the first reading. Question 3: the second, because ...`. Story one should produce few questions; stories two and three will produce more, and that is the point of them.
+2. Now have it write the tests from the agreed criteria:
+   ```
+   Write the acceptance tests for those criteria and decisions in src/Calculator.Tests, one test per criterion, following the acceptance-tests skill. Do not write or change anything under src/Calculator. Then run the tests and show me that every one of them fails.
+   ```
+   Review each test with one filter: if the implementation were subtly wrong, would this fail? Ask for the case that catches it. Check that every decision you made in step 1 is a test, not a comment. Then grade the contract before anyone builds against it: `/grade-tests src/Calculator.Tests/<the test file>.cs` for a letter grade per test method, then `/assertion-quality src/Calculator.Tests/<the test file>.cs` for whether the assertions pin behaviour or merely confirm that nothing threw. Act on what they surface. This is the contract; the time goes into getting it right, not into typing it.
 3. Hand over. Type:
    ```
    Make the tests in src/Calculator.Tests/<your test file>.cs pass by implementing LandedCostCalculator in src/Calculator. Do not modify any test. When you are done, run the tests and show me the output.
@@ -39,7 +47,7 @@ Completed stories are green with tests that were written before the code, you ca
 
 ## Notes
 
-Do not reach for the test generation skills in this activity. Writing the tests yourself is where the questions in the stories surface, and an agent that drafts them first answers those questions silently on your behalf. If the agent modifies a test to make it pass, that is the most valuable moment of the exercise: it did what unverified delegation always does. Revert the test, tighten the prompt, and go again. Two stories done well beats three done loosely.
+Do not reach for the test generation skills (`code-testing-agent` and its pipeline) in this activity. They generate tests from code, and here there is no code: the tests come from the story and from your decisions, which is why step 1 makes the agent list the questions and stop rather than answer them. If the agent modifies a test to make it pass, that is the most valuable moment of the exercise: it did what unverified delegation always does. Revert the test, tighten the prompt, and go again. Two stories done well beats three done loosely.
 
 If your team uses a spec-driven workflow, keep it and add this to it: the specify and plan steps produce the story; the acceptance tests are the part of the spec you hand to the agent as a contract; the implement step runs against them. A spec the agent can only read is advice. A test it has to pass is a requirement.
 
