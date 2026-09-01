@@ -5,7 +5,7 @@ A library of standalone activities, not a fixed agenda. Pull whichever ones fit 
 | # | Activity | Format | Time | Needs first |
 |---|---|---|---|---|
 | 02 | Value stream mapping | Groups of 3 or 4 | 40 min | Nothing |
-| 03 | Config check-up | Pairs | 25 min | The exercise repo |
+| 03 | Config check-up | Pairs | 25 min | A repo you work in daily, in the tool approved for it; the exercise repo as fallback |
 | 04 | The LLM wiki | Pairs | 30 min | The exercise repo |
 | 05 | Acceptance tests first | Pairs | 45 min | 03; 04 helps |
 | 06 | Goal-driven delegation | Pairs | 30 min | 05 (its verification) |
@@ -35,4 +35,4 @@ The library is more than one session's worth on purpose. A session opens with th
 
 Activities 03, 05, 07, 08 and 09 use the `dotnet-test` plugin from the .NET team's skills repository, `dotnet/skills`. Activity 03 installs it and uses the install as a worked example of on-demand loading. If you run 07 and 09 on their own, install it first, or use the offline copy under `vendor/dotnet-skills`, which activity 03 also explains. The skills and agents are markdown files, reviewed and versioned like code. Prompts and repository contents go to the AI provider, exactly as they do with any agentic tool; nothing from any other codebase is involved.
 
-Activities 03 to 09 use the exercise repository. Nothing in them touches any other codebase. Pairs work in Claude Code or GitHub Copilot; the instructions call out any difference.
+Activities 04 to 09 use the exercise repository and touch no other codebase. Activity 03 is the exception by design: it reads the instruction files of a repository the pair already works in, using the tool already approved for it, and changes nothing there. Pairs work in Claude Code or GitHub Copilot; the instructions call out any difference.

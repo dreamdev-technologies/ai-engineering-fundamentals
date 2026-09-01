@@ -24,7 +24,7 @@ Use the **Use this template** button rather than cloning this repository directl
 | `.claude/skills/`, `.claude/agents/`, `.github/agents/` | Two skills and one worked example agent. Activity 08 adds more |
 | `vendor/dotnet-skills` | An offline copy of the .NET testing plugin, for machines that cannot reach the marketplace |
 
-Nothing in the activities touches your own codebase. They run against the code in this repository and nothing else. The business, Meridian Fresh, is fictional.
+The activities run against the code in this repository and change nothing in any other codebase. The one exception is activity 03, which reads the instruction files of a repository you already work in, using the tool already approved for it, and leaves you a diff to review. The business here, Meridian Fresh, is fictional.
 
 ## Running the code
 
