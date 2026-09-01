@@ -2,6 +2,18 @@
 
 On your own. 45 minutes. The exercise repository: `src/Calculator`, `src/Calculator.Tests`, and the three stories in this directory (`story-1.md`, `story-2.md`, `story-3.md`). How to talk to the tools and use a skill is in [tools.md](../tools.md).
 
+## Why this activity exists
+
+The opening talk made the argument that you can hand an agent as much work as you can verify. This activity is where that stops being a slogan. An agent given a story and told to build it will build something plausible, report success, and be wrong in ways that only show up later, because the only check on its work was its own reading of the story. The Claude Code documentation is blunt about it: "Claude stops when the work looks done. Without a check it can run, 'looks done' is the only signal available, and you become the verification loop: every mistake waits for you to notice it." Give it "something that produces a pass or fail, and the loop closes on its own."
+
+The evidence that this matters is older than the tools. DORA's research has, since the first Accelerate report, listed test automation and continuous testing among the capabilities that predict delivery performance, and their 2024 survey found that AI adoption reduced delivery stability, 7.2% for every 25% increase in use. The 2025 report's explanation is that AI amplifies what an organisation already is; the seven capabilities it names as deciding whether AI pays off include working in small batches and strong version control, and the reason those matter is that they are what makes a change checkable. The METR trial from the opening talk found experienced developers 19% slower with AI tools; they accepted fewer than half of the tool's suggestions and spent the time reviewing and correcting the rest. A test the agent has to pass moves that review from after the fact to before the work starts.
+
+The same lesson now comes from the people who build the tools. Anthropic's July 2026 write-up of Claude Code's own context lists six shifts for the Claude 5 generation, and the last is from "simple specs" to "rich references": beyond markdown plans, to "test suites, and rubrics for verification". A separate post the same month describes turning the checks a developer runs by hand into skills so that "Claude closes its own feedback loops". The direction is the same in both: the useful part of a specification is the part that can fail.
+
+That is also how to place this against spec-driven development, which some of you will have seen as GitHub's Spec Kit (September 2025): specify, plan, break into tasks, implement, with the spec as "the source of truth your tools and AI agents use to generate, test, and validate code". The specify and plan steps are worth keeping; writing the story down and asking what it leaves open is exactly step 1 here. But a spec is prose, and the agent that implements it is also the thing that decides whether it has met it. Nothing enforces a paragraph. An acceptance test is the sentence of the spec that has been made executable: the agent cannot reinterpret it, cannot skip it, and cannot claim success while it is red. This is not new either; Gojko Adzic called it specification by example in 2011, and the practice of writing the acceptance tests before the code, acceptance test driven development, is older still. What has changed is that the thing on the other side of the contract now works at machine speed, so the contract has to be checkable at machine speed too.
+
+Two consequences shape the steps below. You write the tests, not the agent, because writing them is where the story's gaps show up, and an agent that drafts them answers those questions silently on your behalf. And the moment an agent edits a test to make it pass is the most valuable moment of the activity: it is unverified delegation doing exactly what it always does, in front of you.
+
 ## Goal
 
 Run the loop that makes delegation safe: write the acceptance tests before any code exists, then let the agent implement against them. The tests are the contract; the agent is the contractor.
@@ -28,3 +40,15 @@ Completed stories are green with tests that were written before the code, you ca
 ## Notes
 
 Do not reach for the test generation skills in this activity. Writing the tests yourself is where the questions in the stories surface, and an agent that drafts them first answers those questions silently on your behalf. If the agent modifies a test to make it pass, that is the most valuable moment of the exercise: it did what unverified delegation always does. Revert the test, tighten the prompt, and go again. Two stories done well beats three done loosely.
+
+If your team uses a spec-driven workflow, keep it and add this to it: the specify and plan steps produce the story; the acceptance tests are the part of the spec you hand to the agent as a contract; the implement step runs against them. A spec the agent can only read is advice. A test it has to pass is a requirement.
+
+## Sources
+
+- [Best practices for Claude Code](https://code.claude.com/docs/en/best-practices), Claude Code docs, "Give Claude a way to verify its work" and "the trust-then-verify gap".
+- DORA, [Test automation](https://dora.dev/capabilities/test-automation/) in the DORA capabilities catalogue, which lists continuous testing alongside it; [Accelerate State of DevOps 2024](https://dora.dev/research/2024/dora-report/) for the stability finding; [State of AI-assisted Software Development 2025](https://dora.dev/research/2025/dora-report/) and the [AI Capabilities Model](https://dora.dev/ai/capabilities-model/report/) for the seven capabilities.
+- METR, [Measuring the impact of early-2025 AI on experienced open-source developer productivity](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), July 2025.
+- Thariq Shihipar, [The new rules of context engineering for Claude 5 generation models](https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models), Anthropic, 24 July 2026. Shift six: simple specs to rich references, test suites and rubrics.
+- Delba de Oliveira, [Building verification loops in Claude Code with skills](https://claude.com/blog/building-verification-loops-in-claude-code-with-skills), Anthropic, 22 July 2026.
+- Den Delimarsky, [Spec-driven development with AI: get started with a new open source toolkit](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/), GitHub, September 2025; [github/spec-kit](https://github.com/github/spec-kit).
+- Gojko Adzic, *Specification by Example*, Manning, 2011.
