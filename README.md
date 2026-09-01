@@ -6,7 +6,7 @@ This repository is meant to be used, not read. Take a copy, work in it, commit t
 
 ## Getting your own copy
 
-Use the **Use this template** button rather than cloning this repository directly. Each pair needs somewhere they can commit and open a pull request, and several activities finish with one. If you cannot see the button, you do not have access to the template yet; ask the facilitator.
+Use the **Use this template** button rather than cloning this repository directly. Each person needs somewhere they can commit and open a pull request, and several activities finish with one. If you cannot see the button, you do not have access to the template yet; ask the facilitator.
 
 ## What is here
 
@@ -24,7 +24,7 @@ Use the **Use this template** button rather than cloning this repository directl
 | `.claude/skills/`, `.claude/agents/`, `.github/agents/` | Two skills and one worked example agent. Activity 08 adds more |
 | `vendor/dotnet-skills` | An offline copy of the .NET testing plugin, for machines that cannot reach the marketplace |
 
-The activities run against the code in this repository and change nothing in any other codebase. The one exception is activity 03, which reads the instruction files of a repository you already work in, using the tool already approved for it, and leaves you a diff to review. The business here, Meridian Fresh, is fictional.
+The activities run against the code in this repository and change nothing in any other codebase. The one exception is activity 03, which reads the instruction files of a repository you already work in, using the tool you normally use on it, and leaves you a diff to review. The business here, Meridian Fresh, is fictional.
 
 ## Running the code
 

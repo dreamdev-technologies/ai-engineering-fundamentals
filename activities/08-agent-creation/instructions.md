@@ -1,6 +1,6 @@
 # 08. Agent creation
 
-Pairs. 35 minutes. The exercise repository, plus the work you produced in activities 05 and 07. How to talk to the tools and use an agent is in [tools.md](../tools.md).
+On your own. 35 minutes. The exercise repository, plus the work you produced in activities 05 and 07. How to talk to the tools and use an agent is in [tools.md](../tools.md).
 
 ## Goal
 
@@ -11,8 +11,8 @@ This activity comes late in the day on purpose. You can only write a good agent 
 ## Steps
 
 1. **Look before you build.** Run `/agents` and read what is already there. The `dotnet-test` plugin from activity 03 ships `test-quality-auditor` and `testability-migration` already, alongside internal pipeline agents it uses itself. Activity 03's rule holds here: do not add what already exists. Build only where nothing shipped fits, which for characterisation work is most of the time.
-2. **Write the file.** Both tools read a markdown file with YAML frontmatter, but from different places: Claude Code reads `.claude/agents/*.md`, VS Code reads `.github/agents/*.agent.md`, and the `tools` list in each uses that tool's own names. `wiki-auditor` exists in both folders as the same agent written for each. Start from it: `Copy .claude/agents/wiki-auditor.md to .claude/agents/atdd.md` (or the `.github/agents/` equivalent with the `.agent.md` suffix), then open the copy and change it. A mixed pair keeps both files identical. The fields that matter are `name`, `description`, `tools` and `model`. Write the `description` for the caller and not for yourself: it is the only thing another agent sees when deciding whether to reach for yours, so it should say when to use this, not what it is.
-3. **Build three, one at a time, together.** Each one bottles an activity you have already run:
+2. **Write the file.** Both tools read a markdown file with YAML frontmatter, but from different places: Claude Code reads `.claude/agents/*.md`, VS Code reads `.github/agents/*.agent.md`, and the `tools` list in each uses that tool's own names. `wiki-auditor` exists in both folders as the same agent written for each. Start from it: `Copy .claude/agents/wiki-auditor.md to .claude/agents/atdd.md` (or the `.github/agents/` equivalent with the `.agent.md` suffix), then open the copy and change it. If you use both tools, keep both files identical. The fields that matter are `name`, `description`, `tools` and `model`. Write the `description` for the caller and not for yourself: it is the only thing another agent sees when deciding whether to reach for yours, so it should say when to use this, not what it is.
+3. **Build three, one at a time.** Each one bottles an activity you have already run:
    - **ATDD agent.** Turns a story into failing acceptance tests. Never writes production code, never edits an existing test, and where the story is ambiguous it stops and lists the questions instead of choosing. That last rule is the entire agent: one that resolves ambiguity quietly reintroduces the exact failure activity 05 exists to prevent.
    - **Characterisation agent.** Records what code does, never what it should do. The code is the oracle: where the value is unknown, assert a deliberately wrong one, run it, and take the real value from the failure message. Never modifies the service under test.
    - **Test grader.** Runs `grade-tests` and `test-anti-patterns` over the tests in a diff and returns the table, no prose, no changes. It reports; it does not fix.
@@ -24,12 +24,12 @@ This activity comes late in the day on purpose. You can only write a good agent 
    Use the characterisation agent on the Render method in src/Legacy/HarbourPricingService.cs.
    Use the test-grader agent on the tests changed in the current branch.
    ```
-   Compare the first with what your pair wrote by hand in activity 05, the second with what you learned in activity 07, and the third with your own opinion of your tests. Where an agent is worse than you were, the gap is almost always in the file rather than the model: fix the instructions, not the prompt, and run it again. Activity 09 gives the ATDD agent its first real job on work nobody has done yet, so anything you leave loose here you will meet again there.
+   Compare the first with what you wrote by hand in activity 05, the second with what you learned in activity 07, and the third with your own opinion of your tests. Where an agent is worse than you were, the gap is almost always in the file rather than the model: fix the instructions, not the prompt, and run it again. Activity 09 gives the ATDD agent its first real job on work nobody has done yet, so anything you leave loose here you will meet again there.
 
 ## Done when
 
-Three agent files exist in `.claude/agents/` or `.github/agents/`, each carries a `model` your pair can justify in a sentence, each has been run against work you had already done by hand, and you can name one rule per agent that is enforced by its tool list rather than by asking nicely.
+Three agent files exist in `.claude/agents/` or `.github/agents/`, each carries a `model` you can justify in a sentence, each has been run against work you had already done by hand, and you can name one rule per agent that is enforced by its tool list rather than by asking nicely.
 
 ## Notes
 
-These files are the reusable artefact of the whole day. Everything else you did was in a session that has now ended; these are in version control, they review like code, and they improve by pull request. Two failure modes to avoid: writing ten agents when three good ones would do, since every extra one is another description competing to be chosen; and writing an agent for work nobody in the pair has done, which produces confident instructions for a job you cannot yet grade.
+These files are the reusable artefact of the whole day. Everything else you did was in a session that has now ended; these are in version control, they review like code, and they improve by pull request. Two failure modes to avoid: writing ten agents when three good ones would do, since every extra one is another description competing to be chosen; and writing an agent for work you have not done yourself, which produces confident instructions for a job you cannot yet grade.

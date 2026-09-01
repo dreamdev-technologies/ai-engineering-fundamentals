@@ -2,7 +2,7 @@
 
 Fill this in as you go. It is what you show at the end.
 
-Pair:
+Name:
 Own repository:
 Tool used on it:
 

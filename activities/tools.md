@@ -46,6 +46,6 @@ Claude Code: `/context` for the token breakdown, then `/skills`, `/agents`, `/mc
 
 Ask: `Show me the commands you ran and their output.` Then have it run the check again in a fresh session, or run it yourself, and read the raw output. The agent that did the work is never the only one grading it.
 
-## Pairing
+## Working through it
 
-One person has the keyboard and does what the step says. The other reads the step aloud, watches, and writes down the results. Swap halfway through each activity.
+Each activity is written to be done on your own, at your own laptop, in your own copy of the repository. When the facilitator walks one person through an activity on the projector, follow along on your own copy rather than watching. Ask the moment you are stuck; nobody is expected to know these tools yet.

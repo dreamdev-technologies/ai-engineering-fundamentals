@@ -1,6 +1,6 @@
 # 02. Value stream mapping
 
-Groups of 3 or 4. 40 minutes. Whiteboard or paper, with `template.md` in this directory on screen as the layout to copy.
+The whole room together on one map, or groups of three or four if there are more than about eight people. 40 minutes. Whiteboard or paper, with `template.md` in this directory on screen as the layout to copy.
 
 ## Goal
 

@@ -1,8 +1,8 @@
 # 04. The LLM wiki: start one for your own system
 
-Pairs. 30 minutes. A repository your pair works in every day, in the tool already approved for it; the `starter` folder in this directory; `answers.md` in this directory for the before-and-after. How to talk to the tools is in [tools.md](../tools.md).
+On your own. 30 minutes. A repository you work in every day, in whichever tool you normally use on it; the `starter` folder in this directory; `answers.md` in this directory for the before-and-after. How to talk to the tools is in [tools.md](../tools.md).
 
-You will be putting knowledge about your own system into your own repository, so the rule from activity 03 holds: use the tool already approved for that code, and only feed it material you are allowed to. Nothing here changes any code.
+Use whichever tool you normally use on that repository. Put into it only what you would put into that tool on a normal working day. The activity adds markdown files on a branch and changes no code.
 
 ## Why this activity exists
 
@@ -30,7 +30,7 @@ Start the wiki for your own system, from nothing, in half an hour: the schema, t
 
 ### Step 1. Ask the question first (3 minutes)
 
-In the tool approved for your repository, in a fresh session, ask one question about your own system that the code cannot answer. Something a new joiner asked in their first week, or something that went wrong because nobody knew it. Paste the question and the answer into `answers.md` under "Before". Expect a confident guess; that is the point.
+In a fresh session on your own repository, ask one question about your own system that the code cannot answer. Something a new joiner asked in their first week, or something that went wrong because nobody knew it. Paste the question and the answer into `answers.md` under "Before". Expect a confident guess; that is the point.
 
 ### Step 2. Install the schema (3 minutes)
 
@@ -42,22 +42,22 @@ In the tool approved for your repository, in a fresh session, ask one question a
 
 Each ingest is the same shape: give the agent raw material and one line saying who it is from and when, then `Use the wiki-ingest skill on this.` Read its report; answer its questions; check the pages it wrote. You decide what is true; it does the filing.
 
-**First, dictation.** One of you talks for two minutes about what the business does, who uses the system, and what it costs when something goes wrong. The other types it as spoken, or use voice typing (on Windows, `Win+H` in the chat box), and do not tidy it. Then:
+**First, dictation.** Talk for two minutes about what the business does, who uses the system, and what it costs when something goes wrong. Use voice typing straight into the chat box (on Windows, `Win+H`), or type it the way you would say it, and do not tidy it. Then:
 
 ```
 This is <name>, <role>, speaking on <date>, describing the business from memory. Use the wiki-ingest skill on it.
 ```
 
-**Second, a document or a transcript.** One real piece of material you are allowed to use with this tool: a page of onboarding notes, an architecture note, a runbook, the transcript or minutes of a recent call. Save it into `wiki/raw/` (or paste it if it is short). Then:
+**Second, a document or a transcript.** One real piece of material that is already on your machine or in the repository and that you would normally put into this tool: a README, a page of onboarding notes, a runbook, the minutes or transcript of a recent call. Save it into `wiki/raw/` (or paste it if it is short). If you have nothing to hand, skip to the third ingest. Then:
 
 ```
 wiki/raw/<file> is <what it is, from whom, dated when>. Use the wiki-ingest skill on it.
 ```
 
-**Third, the gotchas.** Each of you names two things about the system that nobody has written down: the rule that is not in the code, the thing that breaks if you do it the obvious way, the value that must never be hard-coded. Type them as a list, then:
+**Third, the gotchas.** Name three things about the system that nobody has written down: the rule that is not in the code, the thing that breaks if you do it the obvious way, the value that must never be hard-coded. Type them as a list, then:
 
 ```
-These are gotchas from <names>, <date>, from experience, not from a document. Use the wiki-ingest skill on them.
+These are gotchas from <name>, <date>, from experience, not from a document. Use the wiki-ingest skill on them.
 ```
 
 After each ingest, open one page it changed and check three things: every fact has a source, no value was copied that lives in code, and it did not state anything more confidently than you did. The glossary is where agents cheat: a term you used without defining it should say so, not carry a definition it made up. The first ingest is quick; the second is slower because it merges into pages that now exist, so let it run to eight minutes and keep the third short.
@@ -80,7 +80,7 @@ Start a fresh session and ask exactly the same question as step 1. Paste the ans
 
 ## Fallback
 
-If nobody in the pair has a repository they can open, or the tool is not cleared for it, or you have no material you are allowed to use: run the same steps on the exercise repository. Its wiki already exists, so skip step 2, take the architecture page (it has three gaps marked unknown) and ingest what `src/` tells you about them. The exercise repository already has the `wiki-ingest` skill and the auditor.
+If you have no repository you can open here: run the same steps on the exercise repository. Its wiki already exists, so skip step 2, take the architecture page (it has three gaps marked unknown) and ingest what `src/` tells you about them. The exercise repository already has the `wiki-ingest` skill and the auditor.
 
 ## Notes
 

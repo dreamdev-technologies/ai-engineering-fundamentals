@@ -1,8 +1,8 @@
 # 03. Config check-up
 
-Pairs. 25 minutes. Two laptops: one with the exercise repository, one with a repository your pair works in every day. Everything you need is in this folder: `old-style-CLAUDE.md` to calibrate on, and `record.md` to fill in as you go.
+On your own. 25 minutes. Two laptops: one with the exercise repository, one with a repository you work in every day. Everything you need is in this folder: `old-style-CLAUDE.md` to calibrate on, and `record.md` to fill in as you go.
 
-On your own repository, use the tool you already use on that code at work, which for most people is Copilot. Use Claude Code on your own repository only if it has been approved for that code; if you are not sure, it has not, and Claude Code stays on the exercise repository. How to start, clear and talk to either tool is in [tools.md](../tools.md).
+On your own repository, use whichever tool you normally use on it. If you have never used Claude Code on that repository, do not start today; use Claude Code on the exercise repository instead. How to start, clear and talk to either tool is in [tools.md](../tools.md).
 
 ## Why this activity exists
 
@@ -32,7 +32,7 @@ What usually survives is the purpose line, the gotchas, and pointers to where th
 ### Step 1. Calibrate on the old-style file (5 minutes, exercise repository)
 
 1. In VS Code, open `activities/03-config-checkup/old-style-CLAUDE.md`. Tag it in place; it is your copy of the repository and git has the original.
-2. Work down the file one line at a time. The navigator reads the line aloud; the driver types a tag at the start of it: one of the six smell tags above, or `[KEEP]`. Blank lines and headings get no tag. Do not discuss any line for more than fifteen seconds; if you disagree, tag it with both and move on.
+2. Work down the file one line at a time. Read each line and type a tag at the start of it: one of the six smell tags above, or `[KEEP]`. Blank lines and headings get no tag. Fifteen seconds a line at most; if you are torn, tag it with both and move on.
 3. When you reach the end, count the keeps. In the VS Code search box (`Ctrl+F`) search for `[KEEP]`; the count appears on the right of the box. Write the total number of tagged lines and the number of keeps into `record.md`.
 4. Open the exercise repository's real `CLAUDE.md` beside it (drag the tab to the right to split the editor). That file is roughly what your `[KEEP]` lines say. That is the end state you are aiming for on your own repository.
 
@@ -40,16 +40,16 @@ Five minutes, then stop, whether or not you reached the end of the file.
 
 ### Step 2. Ask the agent what it loads from your own repository (5 minutes, own repository)
 
-1. Open your own repository in VS Code (File, Open Folder) and start the tool approved for it: Copilot Chat, or `claude` in the VS Code terminal.
+1. Open your own repository in VS Code (File, Open Folder) and start the tool you normally use on it: Copilot Chat, or `claude` in the VS Code terminal.
 2. Type this prompt:
 
    ```
    List every file you load as instructions at the start of a session in this repository, and any in my home folder that apply to every project: CLAUDE.md files at any level, .claude/rules, AGENTS.md, .github/copilot-instructions.md, .github/instructions/*.instructions.md, and any skills, prompts or agents folders. Give the full path and line count of each. Do not change anything.
    ```
 
-3. The agent replies with a list: the files it loads in full at every start, the skills and agents whose names it carries, memory files, hooks and settings. Both of you read it. Open one of the files it names to confirm it is real. Then ask yourselves what it might have missed; the usual ones are the personal file at `~/.claude/CLAUDE.md`, which loads on every project and people forget exists, and memory folders left behind by an old checkout path. If the list does not mention them, ask: `Is there a CLAUDE.md in my home folder, or a memory folder for this repository under another path, that you also load?`
+3. The agent replies with a list: the files it loads in full at every start, the skills and agents whose names it carries, memory files, hooks and settings. Read it. Open one of the files it names to confirm it is real. Then ask yourselves what it might have missed; the usual ones are the personal file at `~/.claude/CLAUDE.md`, which loads on every project and people forget exists, and memory folders left behind by an old checkout path. If the list does not mention them, ask: `Is there a CLAUDE.md in my home folder, or a memory folder for this repository under another path, that you also load?`
 4. Write every path and line count into `record.md`, including anything that surprised you: a skill advertised twice, a memory file nobody remembers writing.
-5. For everything on the list that is not an instructions file (each skill, agent, memory file, hook, plugin or MCP server), agree between you in one line what would break if it were removed, and write that beside it. Anything you cannot answer for is the next thing to switch off; you do not have to switch it off now.
+5. For everything on the list that is not an instructions file (each skill, agent, memory file, hook, plugin or MCP server), decide in one line what would break if it were removed, and write that beside it. Anything you cannot answer for is the next thing to switch off; you do not have to switch it off now.
 
 If the list contains no instructions file at all, you will do step 5 instead of step 4 later; carry on with step 3.
 
@@ -57,15 +57,13 @@ The point of doing it this way rather than with a search command: the agent is t
 
 ### Step 3. Measure what a session on your repository carries (3 minutes, own repository)
 
-**Claude Code** (only if approved for this repository): in the terminal, in the repository folder, run `claude`. When the prompt appears, type `/context` and press Enter. It prints a breakdown: system prompt, CLAUDE.md, skills, MCP tools, memory, with a token count for each and a total. Write the total and the CLAUDE.md line into `record.md`. Type `/exit` to leave.
+**Claude Code** (only if you already use it on this repository): in the terminal, in the repository folder, run `claude`. When the prompt appears, type `/context` and press Enter. It prints a breakdown: system prompt, CLAUDE.md, skills, MCP tools, memory, with a token count for each and a total. Write the total and the CLAUDE.md line into `record.md`. Type `/exit` to leave.
 
 **Copilot:** there is no token count. Instead record three things. Extensions: open the Extensions view (`Ctrl+Shift+X`), type `@installed` in its search box, and count what is listed. MCP servers: open the Command Palette (`Ctrl+Shift+P`), type `MCP: List Servers`, press Enter, and count what is listed. Instruction lines: add up the line counts from step 2. Write all three into `record.md`. If you want a token number to attach to it, do the Claude Code version of this step on the exercise repository instead and note that it is a different repository.
 
 Steps 4 and 5 are alternatives. If step 2 found instruction files, do step 4 and skip 5. If it found none, skip to step 5.
 
 ### Step 4. Your repository has instruction files: have the agent audit them, review, and make the change (8 minutes, own repository)
-
-Swap driver and navigator.
 
 Scope first. The files that cost you on every prompt are the always-on ones: `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, anything in `.claude/rules/`, and the personal `~/.claude/CLAUDE.md`. Skills, prompts and agents load only when used, so their bodies are not the tax; leave them alone today. From step 2, that is usually two or three files.
 
@@ -78,7 +76,7 @@ You tagged one file by hand in step 1 so that you can judge an audit. Now the ag
    Audit <file 1>, <file 2> line by line against these six smells and return one table with columns: file, line number, the line, tag, one-line reason. Tags: [SHOUT] emphasis words such as ALWAYS, NEVER, CRITICAL, IMPORTANT on more than one line; [REPEAT] a rule stated elsewhere in these files or in a skill; [VERIFY] an instruction to double-check, verify or re-run tests that you would do anyway; [OLD] a restraint on formatting, narration, comments or planning documents; [PROC] a procedure longer than a few lines; [SHOWN] anything the repository already shows, such as directory listings or standard language conventions. Tag everything else [KEEP]. Do not change any file.
    ```
 
-3. Read the table together. You are checking two things: lines it tagged that you would keep (a rule that genuinely prevents a mistake here), and lines it kept that you would cut. Tell it the corrections in one message: `Change line 14 to [KEEP] because ...; change line 40 to [SHOWN].` Expect it to be generous with `[KEEP]`; an agent auditing its own instructions keeps the ones that flatter it, which is why you tagged a file by hand first.
+3. Read the table. You are checking two things: lines it tagged that you would keep (a rule that genuinely prevents a mistake here), and lines it kept that you would cut. Tell it the corrections in one message: `Change line 14 to [KEEP] because ...; change line 40 to [SHOWN].` Expect it to be generous with `[KEEP]`; an agent auditing its own instructions keeps the ones that flatter it, which is why you tagged a file by hand first.
 4. Apply it. Type:
 
    ```
@@ -91,16 +89,16 @@ Do not open, edit or ask about any other file in the repository. The scope is th
 
 ### Step 5. Your repository has no instructions file: write the first one (8 minutes, own repository)
 
-Swap driver and navigator. The agent will type the file; you decide every word in it. An instructions file written by the agent from the code describes what the code already shows, which is exactly what the file must not contain.
+The agent will type the file; you decide every word in it. An instructions file written by the agent from the code describes what the code already shows, which is exactly what the file must not contain.
 
 1. Tell the agent: `Create a git branch called config-checkup and switch to it.`
-2. Before touching the keyboard, agree the content out loud between you, in three parts: one line saying what the repository is for; the gotchas, meaning the things an agent cannot discover by reading the code (the build step that is not obvious, the folder that must not be edited, the convention that differs from the language default, the command that must not be run locally); and pointers to where the values live that the agent must never copy. Nothing the repository already shows; if it is visible in the folder tree or the code, it is not a gotcha. Aim for five to ten items in total.
+2. Before touching the keyboard, decide the content before touching the keyboard, in three parts: one line saying what the repository is for; the gotchas, meaning the things an agent cannot discover by reading the code (the build step that is not obvious, the folder that must not be edited, the convention that differs from the language default, the command that must not be run locally); and pointers to where the values live that the agent must never copy. Nothing the repository already shows; if it is visible in the folder tree or the code, it is not a gotcha. Aim for five to ten items in total.
 3. Dictate it. Type: `Create <.github/copilot-instructions.md or CLAUDE.md> under 30 lines with exactly this content and nothing else:` followed by your items. Do not ask the agent to write it from the code; that produces a description of what the repository already shows, which is the thing the file must not contain.
 4. Read the file it wrote. Cut anything it added that you did not say. Go to step 6.
 
 ### Step 6. Ask the agent one question (2 minutes, own repository)
 
-In the tool approved for your repository, start a fresh session (`claude` in the terminal, or a new chat in Copilot with the `+` button) and type a question a new joiner would ask, for example:
+On your own repository, start a fresh session (`claude` in the terminal, or a new chat in Copilot with the `+` button) and type a question a new joiner would ask, for example:
 
 ```
 What does this repository do, and how do I build and run its tests?
@@ -118,11 +116,11 @@ Last line of `record.md`: one number for what your change saves on every prompt.
 
 ## Done when
 
-`record.md` is filled in, your own repository has a `config-checkup` branch with the instructions file pruned or written, your pair can say in one sentence what each surviving line prevents, and you have one number for what the change saves on every prompt.
+`record.md` is filled in, your own repository has a `config-checkup` branch with the instructions file pruned or written, you can say in one sentence what each surviving line prevents, and you have one number for what the change saves on every prompt.
 
 ## Fallback
 
-If nobody in the pair has a repository they can open on a laptop in the room, or the tool is not cleared for it, do steps 2 to 6 on the exercise repository instead. First put the planted file in place so there is something to cut: tell the agent `Replace CLAUDE.md with the contents of activities/03-config-checkup/old-style-CLAUDE.md`, start a fresh session, measure with `/context`, prune it back, measure again, then `Restore CLAUDE.md from git`. The lesson is the same; only the diff is less useful on Monday.
+If you have no repository you can open here, do steps 2 to 6 on the exercise repository instead. First put the planted file in place so there is something to cut: tell the agent `Replace CLAUDE.md with the contents of activities/03-config-checkup/old-style-CLAUDE.md`, start a fresh session, measure with `/context`, prune it back, measure again, then `Restore CLAUDE.md from git`. The lesson is the same; only the diff is less useful on Monday.
 
 ## Notes
 

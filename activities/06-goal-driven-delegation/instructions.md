@@ -1,6 +1,6 @@
 # 06. Goal-driven delegation
 
-Pairs. 30 minutes. The exercise repository: `src/Calculator`, `tools/benchmark`, `tools/security-scan`. How to talk to the tools is in [tools.md](../tools.md).
+On your own. 30 minutes. The exercise repository: `src/Calculator`, `tools/benchmark`, `tools/security-scan`. How to talk to the tools is in [tools.md](../tools.md).
 
 ## Goal
 
@@ -9,7 +9,7 @@ Move one level up the delegation spectrum: hand the agent a goal and a set of ch
 ## Steps
 
 1. Baseline first. Type `Run tools/benchmark/run.ps1 and tools/security-scan/run.ps1 and show me both outputs in full` (`.sh` on macOS or Linux) and write down the two results. The benchmark times the calculator over a 10,000-line input against a budget; the scan fails on findings. At least one of them should be failing at the start.
-2. Write the goal prompt together. It needs three parts: the goal, the constraints, and the checks the agent must run itself. Start from this and change what you disagree with:
+2. Write the goal prompt. It needs three parts: the goal, the constraints, and the checks the agent must run itself. Start from this and change what you disagree with:
    ```
    Goal: tools/benchmark and tools/security-scan both pass, and the full test suite is green.
    Constraints: do not modify any test, tools/benchmark/budget.json, or anything under tools/security-scan. Fix findings; do not suppress them.
