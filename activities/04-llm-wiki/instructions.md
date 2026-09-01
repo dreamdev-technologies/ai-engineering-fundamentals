@@ -60,7 +60,7 @@ wiki/raw/<file> is <what it is, from whom, dated when>. Use the wiki-ingest skil
 These are gotchas from <names>, <date>, from experience, not from a document. Use the wiki-ingest skill on them.
 ```
 
-After each ingest, open one page it changed and check three things: every fact has a source, no value was copied that lives in code, and it did not state anything more confidently than you did.
+After each ingest, open one page it changed and check three things: every fact has a source, no value was copied that lives in code, and it did not state anything more confidently than you did. The glossary is where agents cheat: a term you used without defining it should say so, not carry a definition it made up. The first ingest is quick; the second is slower because it merges into pages that now exist, so let it run to eight minutes and keep the third short.
 
 ### Step 4. Lint (3 minutes)
 
