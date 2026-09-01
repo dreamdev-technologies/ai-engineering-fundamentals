@@ -1,0 +1,15 @@
+{
+  "name": "dotnet-agent-skills-local",
+  "owner": { "name": ".NET Foundation and Contributors (vendored copy)" },
+  "metadata": {
+    "description": "Offline copy of the dotnet-test plugin from github.com/dotnet/skills, for rooms where the marketplace is blocked.",
+    "version": "2026.09.01"
+  },
+  "plugins": [
+    {
+      "name": "dotnet-test",
+      "source": "./plugins/dotnet-test",
+      "description": "Skills and agents for running, generating, analysing and improving .NET tests."
+    }
+  ]
+}

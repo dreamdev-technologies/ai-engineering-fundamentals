@@ -11,7 +11,7 @@ This activity comes late in the day on purpose. You can only write a good agent 
 ## Steps
 
 1. **Look before you build.** Run `/agents` and read what is already there. The `dotnet-test` plugin from activity 03 ships `test-quality-auditor` and `testability-migration` already, alongside internal pipeline agents it uses itself. Activity 03's rule holds here: do not add what already exists. Build only where nothing shipped fits, which for characterisation work is most of the time.
-2. **Write the file.** Both tools read a markdown file with YAML frontmatter from `.claude/agents/` in the repository, so one file serves the room. VS Code also reads `.github/agents/`. The fields that matter are `name`, `description`, `tools` and `model`. Write the `description` for the caller and not for yourself: it is the only thing another agent sees when deciding whether to reach for yours, so it should say when to use this, not what it is.
+2. **Write the file.** Both tools read a markdown file with YAML frontmatter, but from different places: Claude Code reads `.claude/agents/*.md`, VS Code reads `.github/agents/*.agent.md`, and the `tools` list in each uses that tool's own names. `wiki-auditor` exists in both folders as the same agent written for each; copy whichever matches your tool, and a mixed pair keeps both files identical. The fields that matter are `name`, `description`, `tools` and `model`. Write the `description` for the caller and not for yourself: it is the only thing another agent sees when deciding whether to reach for yours, so it should say when to use this, not what it is.
 3. **Build three, one at a time, as a pair.** Each one bottles an activity you have already run:
    - **ATDD agent.** Turns a story into failing acceptance tests. Never writes production code, never edits an existing test, and where the story is ambiguous it stops and lists the questions instead of choosing. That last rule is the entire agent: one that resolves ambiguity quietly reintroduces the exact failure activity 05 exists to prevent.
    - **Characterisation agent.** Records what code does, never what it should do. The code is the oracle: where the value is unknown, assert a deliberately wrong one, run it, and take the real value from the failure message. Never modifies the service under test.
@@ -22,7 +22,7 @@ This activity comes late in the day on purpose. You can only write a good agent 
 
 ## Done when
 
-Three agent files exist in `.claude/agents/`, each carries a `model` your pair can justify in a sentence, each has been run against work you had already done by hand, and you can name one rule per agent that is enforced by its tool list rather than by asking nicely.
+Three agent files exist in `.claude/agents/` or `.github/agents/`, each carries a `model` your pair can justify in a sentence, each has been run against work you had already done by hand, and you can name one rule per agent that is enforced by its tool list rather than by asking nicely.
 
 ## Notes
 

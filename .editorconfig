@@ -1,0 +1,17 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+# Security rules that tools/security-scan promotes to errors.
+# They are warnings in a normal build so nobody is blocked while working.
+dotnet_diagnostic.CA5350.severity = warning
+dotnet_diagnostic.CA5351.severity = warning
+dotnet_diagnostic.CA5394.severity = warning
+dotnet_diagnostic.CA2100.severity = warning

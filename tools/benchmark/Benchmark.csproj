@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Calculator/Calculator.csproj" />
+    <ProjectReference Include="../../src/TestArchetypes/TestArchetypes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="budget.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

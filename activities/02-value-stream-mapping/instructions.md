@@ -1,6 +1,6 @@
 # 02. Value stream mapping
 
-Groups of 3 or 4. 40 minutes. Whiteboard or the printed template.
+Groups of 3 or 4. 40 minutes. Whiteboard, or `template.md` in this directory, printed one per group.
 
 ## Goal
 

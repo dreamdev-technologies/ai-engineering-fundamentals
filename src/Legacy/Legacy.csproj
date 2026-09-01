@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- The legacy code predates nullable reference types and is left as it was found. -->
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+</Project>

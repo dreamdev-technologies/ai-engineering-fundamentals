@@ -1,0 +1,5 @@
+{
+  "lineItems": 10000,
+  "linesPerConsignment": 50,
+  "maxMilliseconds": 200
+}
