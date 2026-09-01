@@ -31,8 +31,8 @@ What usually survives is the purpose line, the gotchas, and pointers to where th
 
 ### Step 1. Calibrate on the old-style file (5 minutes, exercise repository)
 
-1. In VS Code, open `activities/03-config-checkup/old-style-CLAUDE.md`. Save a copy next to it as `old-style-CLAUDE.audit.md` (File, Save As) so the original stays clean.
-2. Work down the copy one line at a time. The navigator reads the line aloud; the driver types a tag at the start of it: one of the six smell tags above, or `[KEEP]`. Blank lines and headings get no tag. Do not discuss any line for more than fifteen seconds; if you disagree, tag it with both and move on.
+1. In VS Code, open `activities/03-config-checkup/old-style-CLAUDE.md`. Tag it in place; it is your copy of the repository and git has the original.
+2. Work down the file one line at a time. The navigator reads the line aloud; the driver types a tag at the start of it: one of the six smell tags above, or `[KEEP]`. Blank lines and headings get no tag. Do not discuss any line for more than fifteen seconds; if you disagree, tag it with both and move on.
 3. When you reach the end, count the keeps. In the VS Code search box (`Ctrl+F`) search for `[KEEP]`; the count appears on the right of the box. Write the total number of tagged lines and the number of keeps into `record.md`.
 4. Open the exercise repository's real `CLAUDE.md` beside it (drag the tab to the right to split the editor). That file is roughly what your `[KEEP]` lines say. That is the end state you are aiming for on your own repository.
 
