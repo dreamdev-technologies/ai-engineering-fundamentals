@@ -38,7 +38,7 @@ What usually survives is the purpose line, the gotchas, and pointers to where th
 
 Five minutes, then stop, whether or not you reached the end of the file.
 
-### Step 2. Ask the agent what it loads from your own repository (3 minutes, own repository)
+### Step 2. Ask the agent what it loads from your own repository (5 minutes, own repository)
 
 1. Open your own repository in VS Code (File, Open Folder) and start the tool approved for it: Copilot Chat, or `claude` in the VS Code terminal.
 2. Type this prompt:
@@ -48,7 +48,10 @@ Five minutes, then stop, whether or not you reached the end of the file.
    ```
 
 3. The agent replies with a list: the files it loads in full at every start, the skills and agents whose names it carries, memory files, hooks and settings. Both of you read it. Open one of the files it names to confirm it is real. Then ask yourselves what it might have missed; the usual ones are the personal file at `~/.claude/CLAUDE.md`, which loads on every project and people forget exists, and memory folders left behind by an old checkout path. If the list does not mention them, ask: `Is there a CLAUDE.md in my home folder, or a memory folder for this repository under another path, that you also load?`
-4. Write every path and line count into `record.md`, including anything that surprised you: a skill advertised twice, a memory file nobody remembers writing. If the answer is "none", skip to step 5.
+4. Write every path and line count into `record.md`, including anything that surprised you: a skill advertised twice, a memory file nobody remembers writing.
+5. For everything on the list that is not an instructions file (each skill, agent, memory file, hook, plugin or MCP server), agree between you in one line what would break if it were removed, and write that beside it. Anything you cannot answer for is the next thing to switch off; you do not have to switch it off now.
+
+If the list contains no instructions file at all, you will do step 5 instead of step 4 later; carry on with step 3.
 
 The point of doing it this way rather than with a search command: the agent is the thing carrying the context, so it is the right thing to ask. Claude Code users will see the same list under `/context` in the next step, which is the check on the answer.
 
@@ -86,13 +89,7 @@ Swap driver and navigator. The agent will type the file; you decide every word i
 3. Dictate it. Type: `Create <.github/copilot-instructions.md or CLAUDE.md> under 30 lines with exactly this content and nothing else:` followed by your items. Do not ask the agent to write it from the code; that produces a description of what the repository already shows, which is the thing the file must not contain.
 4. Read the file it wrote. Cut anything it added that you did not say. Go to step 6.
 
-### Step 6. List everything else the session loads (2 minutes)
-
-**Claude Code:** in a session on the exercise repository, type each of these and note what comes back: `/mcp` (servers), `/plugin` (installed plugins), `/skills`, `/agents`, `/hooks`, `/memory`. **Copilot:** the extensions and MCP servers from step 3, plus any `.github/prompts/` and `.github/skills/` folders in the repository.
-
-For each item, agree between you, in one line: what would break if this were removed? Write the list and the answers into `record.md`. Anything you could not answer for is the next thing to switch off; you do not have to switch it off now.
-
-### Step 7. Ask the agent one question (2 minutes, own repository)
+### Step 6. Ask the agent one question (2 minutes, own repository)
 
 In the tool approved for your repository, start a fresh session (`claude` in the terminal, or a new chat in Copilot with the `+` button) and type a question a new joiner would ask, for example:
 
@@ -102,7 +99,7 @@ What does this repository do, and how do I build and run its tests?
 
 Read the answer against what you now know is loaded. Did it use your instructions file, or did it read the code? Was anything in the answer wrong because of a line you have just cut, or a line you kept? Write one line in `record.md`.
 
-### Step 8. Install the testing skills for the later activities (2 minutes, exercise repository)
+### Step 7. Install the testing skills for the later activities (2 minutes, exercise repository)
 
 **Claude Code:** in a session on the exercise repository, type `/plugin marketplace add dotnet/skills` and press Enter, then `/plugin install dotnet-test@dotnet-agent-skills`, then `/skills` and `/agents` to see what arrived. Count them; around two dozen skills and ten agents. Then `/context` again and write the new total into `record.md`. It will have moved very little, because only each skill's name and description loads at rest and the body arrives when something invokes it. That is progressive disclosure, measured, and it is where the procedures you moved out in step 4 now live.
 
@@ -116,7 +113,7 @@ Last line of `record.md`: one number for what your change saves on every prompt.
 
 ## Fallback
 
-If nobody in the pair has a repository they can open on a laptop in the room, or the tool is not cleared for it, do steps 2 to 7 on the exercise repository instead. First put the planted file in place so there is something to cut: tell the agent `Replace CLAUDE.md with the contents of activities/03-config-checkup/old-style-CLAUDE.md`, start a fresh session, measure with `/context`, prune it back, measure again, then `Restore CLAUDE.md from git`. The lesson is the same; only the diff is less useful on Monday.
+If nobody in the pair has a repository they can open on a laptop in the room, or the tool is not cleared for it, do steps 2 to 6 on the exercise repository instead. First put the planted file in place so there is something to cut: tell the agent `Replace CLAUDE.md with the contents of activities/03-config-checkup/old-style-CLAUDE.md`, start a fresh session, measure with `/context`, prune it back, measure again, then `Restore CLAUDE.md from git`. The lesson is the same; only the diff is less useful on Monday.
 
 ## Notes
 
