@@ -12,7 +12,7 @@ Check every page you are pointed at (or every page under `wiki/` if none is name
 1. Frontmatter present, with a one-line `description` and `tags`. Tags are the page type plus glossary terms; a page-type tag (business, architecture, gotchas, glossary, wiki, index, log) is not a finding.
 2. Under 150 lines.
 3. Listed in `wiki/index.md` with a one-line summary, and linked from at least one other page. The index itself is exempt from being listed.
-4. Every factual claim about the code (a rate, a rule, a boundary, a file that does something) is either a pointer to where the value lives or is confirmed by reading that code. Quote the file and line that confirms or contradicts it.
+4. Every factual claim is either a pointer to where the value lives, or is confirmed by reading the code it is about, or is confirmed by the raw source named in its attribution under `wiki/raw/`. Quote the file and line that confirms or contradicts it. A fact whose attributed source is a person, with no raw file, cannot be checked; say so once, not per fact.
 5. No contradiction with another wiki page. Grep for the same term across `wiki/` and compare.
 
 Output one table, columns: page, rule, finding, evidence (file:line). Then one line: the number of findings. If a page is clean, say so in one row. Do not propose rewrites, do not suggest changes to code, and do not invent findings to have something to report.
