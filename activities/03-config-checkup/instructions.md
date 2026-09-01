@@ -63,22 +63,31 @@ The point of doing it this way rather than with a search command: the agent is t
 
 Steps 4 and 5 are alternatives. If step 2 found instruction files, do step 4 and skip 5. If it found none, skip to step 5.
 
-### Step 4. Your repository has instruction files: audit them and make the change (8 minutes, own repository)
+### Step 4. Your repository has instruction files: have the agent audit them, review, and make the change (8 minutes, own repository)
 
 Swap driver and navigator.
 
-1. Tell the agent: `Create a git branch called config-checkup and switch to it.` Nothing touches your main line.
-2. Open the largest instructions file from step 2 in the editor. Tag every line exactly as in step 1: the navigator reads, the driver types the tag at the start of the line. Fifteen seconds a line at most. This part is yours; the judgement about what the agent needs is the whole activity, and an agent asked to prune its own instructions will keep the ones that flatter it.
-3. Save the tagged file, then hand the mechanical part over. Type:
+Scope first. The files that cost you on every prompt are the always-on ones: `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, anything in `.claude/rules/`, and the personal `~/.claude/CLAUDE.md`. Skills, prompts and agents load only when used, so their bodies are not the tax; leave them alone today. From step 2, that is usually two or three files.
+
+You tagged one file by hand in step 1 so that you can judge an audit. Now the agent does the tagging and you do the judging.
+
+1. Tell the agent: `Create a git branch called config-checkup and switch to it.`
+2. Hand it the rubric. Type this, naming the always-on files from step 2:
 
    ```
-   In <path to the file> I have tagged each line. Delete every line tagged [SHOUT], [REPEAT], [VERIFY], [OLD] or [SHOWN]. Where a [SHOUT] line carries a rule worth keeping, keep the rule in plain words without the capitals. Move each block tagged [PROC] into its own skill file under <.claude/skills or .github/skills>/<short-name>/SKILL.md with a name and a one-sentence description in the frontmatter, and leave one line in the instructions file that names the skill and when to use it. Remove the [KEEP] tags. Change nothing else, and show me the diff.
+   Audit <file 1>, <file 2> line by line against these six smells and return one table with columns: file, line number, the line, tag, one-line reason. Tags: [SHOUT] emphasis words such as ALWAYS, NEVER, CRITICAL, IMPORTANT on more than one line; [REPEAT] a rule stated elsewhere in these files or in a skill; [VERIFY] an instruction to double-check, verify or re-run tests that you would do anyway; [OLD] a restraint on formatting, narration, comments or planning documents; [PROC] a procedure longer than a few lines; [SHOWN] anything the repository already shows, such as directory listings or standard language conventions. Tag everything else [KEEP]. Do not change any file.
    ```
 
-4. Read the diff together before accepting it. Did it do only what you said? A moved procedure should now be a folder with a `SKILL.md` in it and one line where it used to be.
-5. Ask: `How many lines did the instructions file lose, and how many remain?` Write both into `record.md`. Claude Code users: type `/doctor`, press Enter, and read what it still proposes to cut; act on anything you agree with.
+3. Read the table together. You are checking two things: lines it tagged that you would keep (a rule that genuinely prevents a mistake here), and lines it kept that you would cut. Tell it the corrections in one message: `Change line 14 to [KEEP] because ...; change line 40 to [SHOWN].` Expect it to be generous with `[KEEP]`; an agent auditing its own instructions keeps the ones that flatter it, which is why you tagged a file by hand first.
+4. Apply it. Type:
 
-Do not open, edit or ask about any other file in the repository. The scope is the instruction files.
+   ```
+   Apply the corrected table. Delete every line tagged [SHOUT], [REPEAT], [VERIFY], [OLD] or [SHOWN]. Where a [SHOUT] line carries a rule worth keeping, keep the rule in plain words without the capitals. Move each [PROC] block into its own skill file under <.claude/skills or .github/skills>/<short-name>/SKILL.md with a name and a one-sentence description in the frontmatter, and leave one line in the instructions file naming the skill and when to use it. Change nothing else, and show me the diff.
+   ```
+
+5. Read the diff before accepting it: only the tagged lines went, and each moved procedure is now a folder with a `SKILL.md` and one pointer line. Ask `How many lines did the instruction files lose, and how many remain?` and write both into `record.md`. Claude Code users: type `/doctor`, press Enter, and read what it still proposes to cut; act on anything you agree with.
+
+Do not open, edit or ask about any other file in the repository. The scope is the always-on instruction files.
 
 ### Step 5. Your repository has no instructions file: write the first one (8 minutes, own repository)
 
