@@ -9,7 +9,7 @@ Written context about the business and the system, kept in the repository so tha
 
 ## Three layers
 
-1. **Raw sources.** The code under `src/`, the stories under `activities/`, and anything dropped into `wiki/raw/`: notes, documents, transcripts. Nobody edits these to make the wiki right; the wiki points at them.
+1. **Raw sources.** The code, and anything dropped into `wiki/raw/`: notes, documents, transcripts. Nobody edits these to make the wiki right; the wiki points at them.
 2. **The wiki.** The pages here. Agents help draft and cross-reference them; a person owns what is true.
 3. **The schema.** This file plus `CLAUDE.md` and `.github/copilot-instructions.md`, which tell agents the wiki exists and how it is organised.
 
@@ -26,6 +26,6 @@ Written context about the business and the system, kept in the repository so tha
 - **Fix by pull request.** A wrong page is corrected the way wrong code is: a change, a review, a merge.
 - **Every fact names its source.** A person and date, or a document. A fact with no source is a guess.
 
-## Adding to the wiki
+## Adding a page
 
-Give the agent the source material and say `Use the wiki-ingest skill on this`. It files the facts on the right pages with their sources, updates `index.md`, appends to `log.md`, and reports what it could not place. Then run the `wiki-auditor` agent over the changed pages before opening the pull request. Those are the three operations of the LLM wiki pattern: ingest, query with good answers filed back, and lint.
+Create the file with frontmatter, keep it inside the size limit, add its line to `index.md`, link it from the page it is most related to, append a line to `log.md`, then run the `wiki-auditor` agent (`.claude/agents/`) over it before opening the pull request. Those are the three operations of the LLM wiki pattern: ingest, query with good answers filed back, and lint.
